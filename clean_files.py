@@ -4,6 +4,7 @@ import re
 import tempfile
 import numpy as np
 from datetime import date
+from PIL import Image
 
 
 def gen_folders():
@@ -152,6 +153,23 @@ def write_video(output_file, input_path, fps=60):
 
   out.release()
 
+
+def write_gif(output_file, input_path):
+    frame_array = []
+    file_list = [f for f in os.listdir(input_path)]
+    file_list.sort(key=lambda f: int(re.sub('\D', '', f)))
+
+    for i in range(0,len(file_list),4):
+        filename = os.path.join(input_path, file_list[i])
+        img = Image.open(filename)
+        frame_array.append(img)
+
+    frame_array[0].save(output_file, format='GIF',
+               append_images=frame_array[1:],
+               save_all=True,
+               duration=0, 
+                loop=0
+                    )
 
 def main(videoFile="mystery_3.mp4", cleanup_temp=True):
 
