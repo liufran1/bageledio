@@ -85,7 +85,7 @@ def gen_dilated_frames(col_images, background_image, filepath):
     # image dilation
     dilated = cv2.dilate(thresh, kernel, iterations=1)
 
-    cv2.imwrite(filepath + str(i).rjust(3, '0') + '.png', dilated)
+    cv2.imwrite(os.path.join(filepath, str(i).rjust(3, '0') + '.png'), dilated)
 
 
 def gen_gray_frames(col_images, background_image, filepath):
@@ -101,7 +101,7 @@ def gen_gray_frames(col_images, background_image, filepath):
     # image thresholding
     ret, thresh = cv2.threshold(gray_diff, 30, 255, cv2.THRESH_BINARY)
 
-    cv2.imwrite(filepath + str(i).rjust(3, '0') + '.png', thresh)
+    cv2.imwrite(os.path.join(filepath, str(i).rjust(3, '0') + '.png'), thresh)
 
 
 def gen_diff_frames(col_images, background_image, filepath):
@@ -113,7 +113,8 @@ def gen_diff_frames(col_images, background_image, filepath):
     diff_image = cv2.absdiff(cv2.cvtColor(col_images[i], cv2.COLOR_BGR2RGB),
                              cv2.cvtColor(background_image, cv2.COLOR_BGR2RGB))
 
-    cv2.imwrite(filepath + str(i).rjust(3, '0') + '.png', diff_image)
+    cv2.imwrite(os.path.join(filepath,
+                             str(i).rjust(3, '0') + '.png'), diff_image)
 
 
 def write_video(output_file, input_path, fps=60):
