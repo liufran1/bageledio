@@ -3,8 +3,11 @@ Guessing game of athletes
 
 **To Do**:
 * Build frontend
-* Pass filename as arg to main script
+* Save gifs instead of mp4
 * Streamline creation of original file
+  * Pass filename as arg to main script
+  * Upload files to [cloud location](https://stackoverflow.com/questions/16799956/javascript-to-download-a-file-from-amazon-s3-bucket) - probably don't need to persist 
+  * Have page read from cloud location
 
 **Frontend To Do**
 | Given       | When | Then|
@@ -21,3 +24,6 @@ Guessing game of athletes
 | I have reached the end of the game | The pop-up comes up | Show an option to share |
 | I have reached the end of the game | The pop-up comes up | Show an option to donate |
 | The pop-up is open | I click  the share button | My clipboard is filled with "bageld {todays_date}: \n" black squares for each wrong guess and a tennis ball for the correct guess, like ⬛️⬛️⬛️🎾\n link to page |
+| I have reached the end of the game | ... | Record score in browser cookie |
+| I have reached the end of the game | I refresh the page | I see the end-state pop-up |
+| I have reached the end of the game previously | I reach the end of the game today | I see my score history |
