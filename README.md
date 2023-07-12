@@ -8,6 +8,7 @@ Guessing game of athletes
   * Pass filename as arg to main script
   * Upload files to [cloud location](https://stackoverflow.com/questions/16799956/javascript-to-download-a-file-from-amazon-s3-bucket) - probably don't need to persist 
   * Have page read from cloud location
+  * Update dictionary the lambda is reading from
 
 **Frontend To Do**
 | Given       | When | Then|
