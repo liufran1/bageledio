@@ -153,13 +153,13 @@ def main(videoFile="mystery_3.mp4"):
   background = load_video(videoFile, temp_dir.name)
   col_images = load_frames(output_dirs[0])
 
-  gen_dilated_frames(col_images, output_dirs[1], background)
+  gen_dilated_frames(col_images, background, output_dirs[1])
   write_video("mystery_0.mp4", output_dirs[1])
 
-  gen_dilated_frames(col_images, output_dirs[2], background)
+  gen_gray_frames(col_images, background, output_dirs[2])
   write_video("mystery_1.mp4", output_dirs[2])
 
-  gen_dilated_frames(col_images, output_dirs[3], background)
+  gen_diff_frames(col_images, background, output_dirs[3])
   write_video("mystery_2.mp4", output_dirs[3])
 
   temp_dir.cleanup()
