@@ -11,20 +11,22 @@ Guessing game of athletes
   * Update dictionary the lambda is reading from
 
 **Frontend To Do**
+
+Automatically pull from backend
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
-| I navigate to the page | The page loads |The first gif is available and I see a dropdown to select a player and a button to submit | ✅ |
-| I am on the page and the flag is set to male | I click on the dropdown |I see a list of the top 100 players in the ATP| ✅ |
-| I am on the page and the flag is set to female | I click on the dropdown |I see a list of the top 100 players in the WTA| ✅ |
+| I am on the page | the page loads | A call is made to get the hashed answer and the updated files| |
+
+Typeahead dropdown
+| Given       | When | Then| Status |
+| ----------- | ----------- | ----------- | ----------- |
 | Given I am in the dropdown | I begin typing | the dropdown filters for players whose name contains that substring| |
-| A player is selected | I click the submit button | A call is made with the player's name to https://ci39xriub5.execute-api.us-east-2.amazonaws.com/bagelio_check?player_name={player_name} | |
-| A successful API call | The response is false | show the next gif | ✅ |
-| I am on on the last gif | The response is false | Show pop-up indicating that I lost | ✅ |
-| A successful API call | The response is true | Show pop-up indicating that I won | ✅ |
-| I have reached the end of the game | The pop-up comes up | Show the number of guesses I took | ✅ |
-| I have reached the end of the game | The pop-up comes up | Show an option to share | |
+
+Scores are saved
+
+| Given       | When | Then| Status |
+| ----------- | ----------- | ----------- | ----------- |
 | I have reached the end of the game | The pop-up comes up | Show an option to donate | |
-| The pop-up is open | I click  the share button | My clipboard is filled with "bageld {todays_date}: \n" black squares for each wrong guess and a tennis ball for the correct guess, like ⬛️⬛️⬛️🎾\n link to page | |
 | I have reached the end of the game | ... | Record score in browser cookie | |
 | I have reached the end of the game | I refresh the page | I see the end-state pop-up | |
 | I have reached the end of the game previously | I reach the end of the game today | I see my score history | |
