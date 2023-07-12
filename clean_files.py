@@ -148,22 +148,25 @@ def write_video(output_file, input_path, fps=60):
   out.release()
 
 
-def main(videoFile="mystery_3.mp4"):
+def main(videoFile="mystery_3.mp4", cleanup_temp=True):
 
-  temp_dir, output_dirs = gen_folders()
-  background = load_video(videoFile, temp_dir.name)
-  col_images = load_frames(output_dirs[0])
+    temp_dir, output_dirs = gen_folders()
+    background = load_video(videoFile, temp_dir.name)
+    col_images = load_frames(output_dirs[0])
 
-  gen_dilated_frames(col_images, background, output_dirs[1])
-  write_video("mystery_0.mp4", output_dirs[1])
+    gen_dilated_frames(col_images, background, output_dirs[1])
+    write_video("mystery_0.mp4", output_dirs[1])
 
-  gen_gray_frames(col_images, background, output_dirs[2])
-  write_video("mystery_1.mp4", output_dirs[2])
+    gen_gray_frames(col_images, background, output_dirs[2])
+    write_video("mystery_1.mp4", output_dirs[2])
 
-  gen_diff_frames(col_images, background, output_dirs[3])
-  write_video("mystery_2.mp4", output_dirs[3])
+    gen_diff_frames(col_images, background, output_dirs[3])
+    write_video("mystery_2.mp4", output_dirs[3])
 
-  temp_dir.cleanup()
+    if cleanup_temp:
+        temp_dir.cleanup()
+    else:
+        return temp_dir
 
 
 if __name__ == "__main__":
