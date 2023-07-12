@@ -20,4 +20,4 @@ Guessing game of athletes
 | I have reached the end of the game | The pop-up comes up | Show the number of guesses I took |
 | I have reached the end of the game | The pop-up comes up | Show an option to share |
 | I have reached the end of the game | The pop-up comes up | Show an option to donate |
-| The pop-up is open | I click  the share button | My clipboard is filled with "bageld {todays_date}: \n" black squares for each wrong guess and a tennis ball for the correct guess \n link to page |
+| The pop-up is open | I click  the share button | My clipboard is filled with "bageld {todays_date}: \n" black squares for each wrong guess and a tennis ball for the correct guess, like ⬛️⬛️⬛️🎾\n link to page |
