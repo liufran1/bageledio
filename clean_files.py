@@ -37,8 +37,8 @@ def load_video(videoFile, filepath):
     if (ret != True):
       break
     else:
-      filename = f"{filepath}/frames/frame{str(count).rjust(3, '0')}.jpg"      \
-                  count+=1
+      filename = f"{filepath}/frames/frame{str(count).rjust(3, '0')}.jpg"
+      count += 1
       cv2.imwrite(filename, frame)
       # Get average frames
       if first_iter:
@@ -147,8 +147,8 @@ def write_video(output_file, input_path, fps=60):
   out.release()
 
 
-def main():
-  videoFile = "mystery_3.mp4"
+def main(videoFile="mystery_3.mp4"):
+
   temp_dir, output_dirs = gen_folders()
   background = load_video(videoFile, temp_dir.name)
   col_images = load_frames(output_dirs[0])
@@ -164,5 +164,6 @@ def main():
 
   temp_dir.cleanup()
 
+
 if __name__ == "__main__":
-    main()
+  main()
