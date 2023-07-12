@@ -125,7 +125,7 @@ def write_video(output_file, input_path, fps=60):
   file_list.sort(key=lambda f: int(re.sub('\D', '', f)))
 
   for i in range(len(file_list)):
-    filename = input_path + file_list[i]
+    filename = os.path.join(input_path, file_list[i])
 
     #read frames
     img = cv2.imread(filename)
