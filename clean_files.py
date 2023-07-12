@@ -3,6 +3,7 @@ import os
 import re
 import tempfile
 import numpy as np
+from datetime import date
 
 
 def gen_folders():
@@ -14,12 +15,16 @@ def gen_folders():
   gray_path = os.path.join(temp_dir.name, "diff_gray_frames")  # image 1
   diff_path = os.path.join(temp_dir.name, "diff_frames")  # image 2
 
+  today = date.today()
+  output_path = os.path.join(temp_dir.name, str(today))
+
   os.mkdir(frames_path)
   os.mkdir(dilate_path)
   os.mkdir(gray_path)
   os.mkdir(diff_path)
+  os.mkdir(output_path)
 
-  return temp_dir, [frames_path, dilate_path, gray_path, diff_path]
+  return temp_dir, [frames_path, dilate_path, gray_path, diff_path, output_path]
 
 
 def load_video(videoFile, filepath):
