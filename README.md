@@ -1,4 +1,4 @@
-# bageledio
+# bageld
 Guessing game of athletes
 
 **To Do**:
