@@ -11,7 +11,7 @@ import json
 def get_video(awssession, today):
     # Download from s3
     s3 = awssession.resource('s3')
-    s3_client = session.client('s3')
+    s3_client = awssession.client('s3')
 
     filenames = [my_bucket_object.key for my_bucket_object in s3.Bucket('bageld-inputs').objects.all()]
 
