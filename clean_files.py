@@ -5,6 +5,8 @@ import tempfile
 import numpy as np
 from datetime import date
 from PIL import Image
+import boto3
+import json
 
 
 def gen_folders():
@@ -185,6 +187,14 @@ def hashAnswer(inputString):
 
 
 def main(videoFile="mystery_3.mp4", cleanup_temp=True):
+      # Download from s3
+  today = str(date.today()).replace('-','')
+
+    # filenames = [my_bucket_object.key for my_bucket_object in s3.Bucket('bageld-inputs').objects.all()]
+    # videoFile = list(filter(lambda x: today in x, filenames))[0]
+
+    # player_name = videoFile.split(';')[1].replace('_',' ')
+    # tour = videoFile.split(';')[2]
 
   temp_dir, output_dirs = gen_folders()
   background = load_video(videoFile, temp_dir.name)
