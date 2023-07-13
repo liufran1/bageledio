@@ -20,7 +20,7 @@ Automatically pull from backend
 | ----------- | ----------- | ----------- | ----------- |
 | I am on the page | the page loads | A call is made to get the hashed answer and the updated files| |
 
-Typeahead dropdown
+[Typeahead dropdown](https://jsuites.net/v4/dropdown-and-autocomplete)
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
 | Given I am in the dropdown | I begin typing | the dropdown filters for players whose name contains that substring| |
