@@ -8,6 +8,30 @@ from PIL import Image
 import boto3
 import json
 
+def get_video(awssession, today):
+    # Download from s3
+    s3 = awssession.resource('s3')
+    s3_client = session.client('s3')
+
+    filenames = [my_bucket_object.key for my_bucket_object in s3.Bucket('bageld-inputs').objects.all()]
+
+    videoFile = list(filter(lambda x: today in x, filenames))[0]
+
+    player_name = videoFile.split(';')[1].replace('_',' ')
+    tour = videoFile.split(';')[2]
+    s3_client.download_file('bageld-inputs', videoFile, videoFile)
+
+    return videoFile, player_name, tour
+
+def upload_game_params(awssession, player_name, tour):
+    s3 = awssession.resource('s3')
+    
+    params_json = json.dumps({
+        'answerHash':hashAnswer(player_name.upper()),
+        'tour':tour
+    }, indent=4)
+
+    s3.Bucket('bageld-inputs').put_object(Key='bageld_params.json', Body=params_json)
 
 def gen_folders():
   temp_dir = tempfile.TemporaryDirectory()
