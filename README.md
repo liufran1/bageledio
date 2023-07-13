@@ -1,14 +1,17 @@
 # bageld
 Guessing game of athletes
 
-**To Do**:
-* Build frontend
-* Save gifs instead of mp4
+**Backend To Do**:
 * Streamline creation of original file
-  * Pass filename as arg to main script
-  * Upload files to [cloud location](https://stackoverflow.com/questions/16799956/javascript-to-download-a-file-from-amazon-s3-bucket) - probably don't need to persist 
+  * Upload files to [cloud location](https://stackoverflow.com/questions/16799956/javascript-to-download-a-file-from-amazon-s3-bucket) - probably don't need to persist. Can be same filenames forever, just get overwritten every day 
   * Have page read from cloud location
-  * Update dictionary the lambda is reading from
+  * Write the hashed answer to a file that the Lambda just spits back
+  * Lambda is just there to get the hashed answer
+* Pass filename as arg to main script
+* Cron job runs at certain time
+* Have folder of files ready to go, script iterates over the files
+* Expand to other sports
+    * Basketball - requires more sophisticated object detection
 
 **Frontend To Do**
 
