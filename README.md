@@ -3,10 +3,11 @@ Guessing game of athletes
 
 **Backend To Do**:
 * Streamline creation of original file
-  * Upload files to [cloud location](https://stackoverflow.com/questions/16799956/javascript-to-download-a-file-from-amazon-s3-bucket) - probably don't need to persist. Can be same filenames forever, just get overwritten every day 
-  * Have page read from cloud location
+  * Upload files to s3
   * Write the hashed answer to a file that the Lambda just spits back
   * Lambda is just there to get the hashed answer
+  * have source videos in an s3 bucket, with filename of YYYYMMDD_FIRSTNAME_LASTNAME
+  * script looks for relevant filename on a given day and extracts the name
 * Pass filename as arg to main script
 * Cron job runs at certain time
 * Have folder of files ready to go, script iterates over the files
