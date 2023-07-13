@@ -21,6 +21,8 @@ Typeahead dropdown
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
 | Given I am in the dropdown | I begin typing | the dropdown filters for players whose name contains that substring| |
+| No player is selected | I try to click the guess button | the button is disabled, and the css is updated accordingly| |
+| A player is selected | I try to click the guess button | the button is enabled. Use an event listener to update this| |
 
 Scores are saved
 
