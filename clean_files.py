@@ -25,7 +25,9 @@ def gen_folders():
   os.mkdir(diff_path)
   os.mkdir(output_path)
 
-  return temp_dir, [frames_path, dilate_path, gray_path, diff_path, output_path]
+  return temp_dir, [
+    frames_path, dilate_path, gray_path, diff_path, output_path
+  ]
 
 
 def load_video(videoFile, filepath):
@@ -155,43 +157,54 @@ def write_video(output_file, input_path, fps=60):
 
 
 def write_gif(output_file, input_path):
-    frame_array = []
-    file_list = [f for f in os.listdir(input_path)]
-    file_list.sort(key=lambda f: int(re.sub('\D', '', f)))
+  frame_array = []
+  file_list = [f for f in os.listdir(input_path)]
+  file_list.sort(key=lambda f: int(re.sub('\D', '', f)))
 
-    for i in range(0,len(file_list),4):
-        filename = os.path.join(input_path, file_list[i])
-        img = Image.open(filename)
-        frame_array.append(img)
+  for i in range(0, len(file_list), 4):
+    filename = os.path.join(input_path, file_list[i])
+    img = Image.open(filename)
+    frame_array.append(img)
 
-    frame_array[0].save(output_file, format='GIF',
-               append_images=frame_array[1:],
-               save_all=True,
-               duration=0, 
-                loop=0
-                    )
+  frame_array[0].save(output_file,
+                      format='GIF',
+                      append_images=frame_array[1:],
+                      save_all=True,
+                      duration=0,
+                      loop=0)
+
+
+def hashAnswer(inputString):
+  hash_value = 1
+  if len(inputString) == 0:
+    return hash_value
+  for x in range(len(inputString)):
+    ch = ord(inputString[x])
+    hash_value = (hash_value * ch) % 100000000 + 1
+  return hash_value
+
 
 def main(videoFile="mystery_3.mp4", cleanup_temp=True):
 
-    temp_dir, output_dirs = gen_folders()
-    background = load_video(videoFile, temp_dir.name)
-    col_images = load_frames(output_dirs[0])
+  temp_dir, output_dirs = gen_folders()
+  background = load_video(videoFile, temp_dir.name)
+  col_images = load_frames(output_dirs[0])
 
-    gen_dilated_frames(col_images, background, output_dirs[1])
-    write_gif("mystery_0.gif", output_dirs[1])
+  gen_dilated_frames(col_images, background, output_dirs[1])
+  write_gif("mystery_0.gif", output_dirs[1])
 
-    gen_gray_frames(col_images, background, output_dirs[2])
-    write_gif("mystery_1.gif", output_dirs[2])
+  gen_gray_frames(col_images, background, output_dirs[2])
+  write_gif("mystery_1.gif", output_dirs[2])
 
-    gen_diff_frames(col_images, background, output_dirs[3])
-    write_gif("mystery_2.gif", output_dirs[3])
+  gen_diff_frames(col_images, background, output_dirs[3])
+  write_gif("mystery_2.gif", output_dirs[3])
 
-    write_gif("mystery_3.gif", output_dirs[0])
+  write_gif("mystery_3.gif", output_dirs[0])
 
-    if cleanup_temp:
-        temp_dir.cleanup()
-    else:
-        return temp_dir
+  if cleanup_temp:
+    temp_dir.cleanup()
+  else:
+    return temp_dir
 
 
 if __name__ == "__main__":
