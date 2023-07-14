@@ -3,6 +3,9 @@ Guessing game of athletes
 
 **Backend To Do**:
 * Streamline creation of original file
+ * staged_videos/ now contains videos with dates assigned
+ * raw_videos/ now contains videos that still need to have dates assigned
+ * don't need to update code because it currently just searches for the date in the filename, and the prefix doesn't impact the parsing
 * Cron job runs at certain time - AWS lambda
 * Have folder of files ready to go, script iterates over the files
 * have database of videos
