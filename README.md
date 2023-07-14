@@ -13,7 +13,7 @@ Guessing game of athletes
 Automatically pull from backend
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
-| I am on the page | the page loads | A call is made to get the hashed answer and the updated files - currently the call runs everytime the page loads, need to prevent it from reloading the page| |
+| I am on the page | the page loads | A call is made to get the hashed answer and the updated files - need way to persist value of the answer - could try saving it into the dom lmao| |
 
 [Typeahead dropdown](https://jsuites.net/v4/dropdown-and-autocomplete)
 | Given       | When | Then| Status |
