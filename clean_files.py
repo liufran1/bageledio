@@ -32,7 +32,7 @@ def get_video(awssession, today):
   tour = videoFile.split(';')[2]
   s3_client.download_file('bageld-inputs', videoFile, videoFile[videoFile.find(';')+1:])
 
-  return videoFile, player_name, tour
+  return videoFile[videoFile.find(';')+1:], player_name, tour
 
 
 def upload_game_params(awssession, player_name, tour):
