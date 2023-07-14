@@ -20,6 +20,7 @@ Automatically pull from backend
 
 Deploy in separate website
 * See how squarespace does all of the management and certs bits
+* set up logging and metrics
 
 Update css
 
