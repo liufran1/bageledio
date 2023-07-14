@@ -8,30 +8,45 @@ from PIL import Image
 import boto3
 import json
 
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+
+
 def get_video(awssession, today):
-    # Download from s3
-    s3 = awssession.resource('s3')
-    s3_client = awssession.client('s3')
+  # Download from s3
+  s3 = awssession.resource('s3')
+  s3_client = awssession.client('s3')
 
-    filenames = [my_bucket_object.key for my_bucket_object in s3.Bucket('bageld-inputs').objects.all()]
+  filenames = [
+    my_bucket_object.key
+    for my_bucket_object in s3.Bucket('bageld-inputs').objects.all()
+  ]
 
-    videoFile = list(filter(lambda x: today in x, filenames))[0]
+  videoFile = list(filter(lambda x: today in x, filenames))[0]
 
-    player_name = videoFile.split(';')[1].replace('_',' ')
-    tour = videoFile.split(';')[2]
-    s3_client.download_file('bageld-inputs', videoFile, videoFile)
+  player_name = videoFile.split(';')[1].replace('_', ' ')
+  tour = videoFile.split(';')[2]
+  s3_client.download_file('bageld-inputs', videoFile, videoFile)
 
-    return videoFile, player_name, tour
+  return videoFile, player_name, tour
+
 
 def upload_game_params(awssession, player_name, tour):
-    s3 = awssession.resource('s3')
-    
-    params_json = json.dumps({
-        'answerHash':hashAnswer(player_name.upper()),
-        'tour':tour
+  s3 = awssession.resource('s3')
+
+  params_json = json.dumps(
+    {
+      'answerHash': hashAnswer(player_name.upper()),
+      'tour': tour
     }, indent=4)
 
-    s3.Bucket('bageld-inputs').put_object(Key='bageld_params.json', Body=params_json)
+  s3.Bucket('bageld-inputs').put_object(Key='bageld_params.json',
+                                        Body=params_json)
+
 
 def gen_folders():
   temp_dir = tempfile.TemporaryDirectory()
@@ -211,46 +226,40 @@ def hashAnswer(inputString):
 
 
 def main(cleanup_temp=True):
-    # today = str(date.today()).replace('-','')
-    today = '20230714'
+  today = str(date.today()).replace('-', '')
 
+  session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID,
+                          aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+  s3_client = session.client('s3')
 
-    session = boto3.Session(
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-    )
-    s3_client = session.client('s3')
+  videoFile, player_name, tour = get_video(awssession=session, today=today)
+  upload_game_params(awssession=session, player_name=player_name, tour=tour)
 
-    videoFile, player_name, tour = get_video(awssession=session, today=today)
-    upload_game_params(awssession=session, player_name=player_name, tour=tour)
+  temp_dir, output_dirs = gen_folders()
+  background = load_video(videoFile, temp_dir.name)
+  col_images = load_frames(output_dirs[0])
 
+  gen_dilated_frames(col_images, background, output_dirs[1])
+  write_gif("mystery_0.gif", output_dirs[1])
 
+  gen_gray_frames(col_images, background, output_dirs[2])
+  write_gif("mystery_1.gif", output_dirs[2])
 
-    temp_dir, output_dirs = gen_folders()
-    background = load_video(videoFile, temp_dir.name)
-    col_images = load_frames(output_dirs[0])
+  gen_diff_frames(col_images, background, output_dirs[3])
+  write_gif("mystery_2.gif", output_dirs[3])
 
-    gen_dilated_frames(col_images, background, output_dirs[1])
-    write_gif("mystery_0.gif", output_dirs[1])
+  write_gif("mystery_3.gif", output_dirs[0])
 
-    gen_gray_frames(col_images, background, output_dirs[2])
-    write_gif("mystery_1.gif", output_dirs[2])
+  for i in range(4):
+    s3_client.upload_file(f'mystery_{i}.gif', 'bagelio-files',
+                          f'gifs/mystery_{i}.gif')
 
-    gen_diff_frames(col_images, background, output_dirs[3])
-    write_gif("mystery_2.gif", output_dirs[3])
+  # need new function to update the database of old games, and delete yesterday's raw video to save s3 space
 
-    write_gif("mystery_3.gif", output_dirs[0])
-
-    for i in range(4):
-        # s3.Bucket('bagelio-files').put_object(Key=f'gifs/mystery_{i}.gif', Body=params_json)
-        s3_client.upload_file(f'mystery_{i}.gif', 'bagelio-files', f'test/mystery_{i}.gif')
-        
-
-
-    if cleanup_temp:
-        temp_dir.cleanup()
-    else:
-        return temp_dir
+  if cleanup_temp:
+    temp_dir.cleanup()
+  else:
+    return temp_dir
 
 
 if __name__ == "__main__":

@@ -3,8 +3,11 @@ Guessing game of athletes
 
 **Backend To Do**:
 * Streamline creation of original file
-* Cron job runs at certain time
+* Cron job runs at certain time - AWS lambda
 * Have folder of files ready to go, script iterates over the files
+* have database of videos
+* automatically assign dates to video, given atp/wta, top view vs bottom view, when the player was last featured. submit info to the script, and it renames the file automatically - don't include date in video name, instead have top/bottom
+  * could do reoptimizations every day - rename older files based on new files
 * Expand to other sports
     * Basketball - requires more sophisticated object detection
 
@@ -14,6 +17,12 @@ Automatically pull from backend
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
 | I am on the page | the page loads | A call is made to get the hashed answer and the updated files - need way to persist value of the answer - could try saving it into the dom lmao| |
+
+Deploy in separate website
+* See how squarespace does all of the management and certs bits
+
+Update css
+
 
 [Typeahead dropdown](https://jsuites.net/v4/dropdown-and-autocomplete)
 | Given       | When | Then| Status |
@@ -30,3 +39,7 @@ Scores are saved
 | I have reached the end of the game | ... | Record score in browser cookie | |
 | I have reached the end of the game | I refresh the page | I see the end-state pop-up | |
 | I have reached the end of the game previously | I reach the end of the game today | I see my score history | |
+
+
+Backlog
+* Update dropdown items to be less hardcoded
