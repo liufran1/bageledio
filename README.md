@@ -16,24 +16,11 @@ Guessing game of athletes
 
 **Frontend To Do**
 
-Automatically pull from backend
-| Given       | When | Then| Status |
-| ----------- | ----------- | ----------- | ----------- |
-| I am on the page | the page loads | A call is made to get the hashed answer and the updated files - need way to persist value of the answer - could try saving it into the dom lmao| |
-
 Deploy in separate website
 * See how squarespace does all of the management and certs bits
 * set up logging and metrics
 
 Update css
-
-
-[Typeahead dropdown](https://jsuites.net/v4/dropdown-and-autocomplete)
-| Given       | When | Then| Status |
-| ----------- | ----------- | ----------- | ----------- |
-| Given I am in the dropdown | I begin typing | the dropdown filters for players whose name contains that substring| |
-| No player is selected | I try to click the guess button | the button is disabled, and the css is updated accordingly| |
-| A player is selected | I try to click the guess button | the button is enabled. Use an event listener to update this| |
 
 Scores are saved
 
