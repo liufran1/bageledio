@@ -30,7 +30,7 @@ def get_video(awssession, today):
 
   player_name = videoFile.split(';')[1].replace('_', ' ')
   tour = videoFile.split(';')[2]
-  s3_client.download_file('bageld-inputs', videoFile, videoFile)
+  s3_client.download_file('bageld-inputs', videoFile, videoFile[videoFile.find(';')+1:])
 
   return videoFile, player_name, tour
 
