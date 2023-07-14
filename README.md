@@ -43,4 +43,4 @@ Scores are saved
 
 
 Backlog
-* Update dropdown items to be less hardcoded
+* Update dropdown items to be less hardcoded - combo of top ranked players and players in the database of games
