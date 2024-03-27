@@ -170,26 +170,6 @@ function get_tour_list(atp_wta) {
 }
 
 
-
-function clipboardShare() {
-  // Get the text field
-  if (num_guesses == 4) {
-    var textData = `My bageld score:  \n${'🟨'.repeat(4)} \n https://liufran1.github.io/projects/bageld`
-
-  }
-  else {
-    var textData = `My bageld score:  \n${'🟨'.repeat(num_guesses - 1)}🎾${'⬛️'.repeat(4 - (num_guesses - 1) - 1)} \n https://liufran1.github.io/projects/bageld`
-  }
-
-
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(textData).then(function() { alert("Result copied to clipboard "); });
-
-  // Alert the copied text
-
-}
-
-
 async function main() {
 
   jsondata = await getJson(apiUrl)
@@ -216,50 +196,25 @@ if (getparams) {
 
 
 function get_guess() {
-  var hintContainer = document.getElementById("bagelhint");
-  var progressContainer = document.getElementById("progress");
-  var inputSelector = document.getElementById("inputSelector");
-  var shareButton = "<button onclick=\"clipboardShare()\">Share</button>"
-  var dropdowndiv = document.getElementById("dropdown");
-
-  console.log(jsondata)
-  console.log(dropdown.getValue())
 
   var selectedPlayer = dropdown.getValue()
   if (selectedPlayer.length == 0) {
     console.log(selectedPlayer);
   }
   else {
-    console.log(selectedPlayer)
-    console.log(hashAnswer(selectedPlayer.toUpperCase()))
     num_guesses += 1;
-
-    console.log(jsondata['answerHash'])
 
     if (hashAnswer(selectedPlayer.toUpperCase()) != jsondata['answerHash']) {
       if (num_guesses == max_guesses) {
         renderFailure()
-        // hintContainer.innerHTML = experimentMessage + `<p>Sorry, better luck next time</p><p>Share your results: ${'🟨'.repeat(num_guesses)}</p>` + shareButton
-        // progressContainer.innerHTML = ''
-        // inputSelector.remove()
-        // dropdowndiv.remove()
       }
       else {
-        // console.log(num_guesses)
-        // hintContainer.innerHTML = `<img src="https://bagelio-files.s3.us-east-2.amazonaws.com/gifs/mystery_${num_guesses}.gif" width="100%">`
-        // progressContainer.innerHTML = `<p>${'🟨'.repeat(num_guesses) + '⬛️'.repeat(4 - (num_guesses))}</p>`
         renderNext()
 
       }
     }
     else {
       renderEnd()
-      // console.log(num_guesses)
-      // hintContainer.innerHTML = experimentMessage + `<p>You solved it in ${num_guesses} guess${num_guesses > 1 ? 'es' : ''}</p><p>Share your results: ${'🟨'.repeat(num_guesses - 1)}🎾${'⬛️'.repeat(4 - (num_guesses - 1) - 1)}</p>` + shareButton
-      // progressContainer.innerHTML = ''
-      // inputSelector.remove()
-      // dropdowndiv.remove()
-      // update page for success
     }
   }
 
