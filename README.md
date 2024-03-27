@@ -16,13 +16,11 @@ Guessing game of athletes
 
 **Frontend To Do**
 
-Deploy in separate website
-* See how squarespace does all of the management and certs bits
-* set up logging and metrics
+* Refactor to bring in line with other games
+* Update css
+* Scores are saved
+* Update dropdown items to be less hardcoded - combo of top ranked players and players in the database of games
 
-Update css
-
-Scores are saved
 
 | Given       | When | Then| Status |
 | ----------- | ----------- | ----------- | ----------- |
@@ -32,5 +30,3 @@ Scores are saved
 | I have reached the end of the game previously | I reach the end of the game today | I see my score history | |
 
 
-Backlog
-* Update dropdown items to be less hardcoded - combo of top ranked players and players in the database of games
