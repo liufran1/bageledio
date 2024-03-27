@@ -16,7 +16,6 @@ Guessing game of athletes
 
 **Frontend To Do**
 
-* Refactor to bring in line with other games
 * Update css
 * Scores are saved
 * Update dropdown items to be less hardcoded - combo of top ranked players and players in the database of games
