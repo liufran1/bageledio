@@ -14,30 +14,31 @@
 </head>
 
 <body>
-  <div>
-    <h1 class="title" id="title">Who's that tennis player?</h1>
-  </div>
-  <div id="gameNum" style="text-align: left; padding-top: 0.5rem; padding-bottom: 0.5rem;"></div>
-  <div id="bagelhint">
-    <img src="https://bagelio-files.s3.us-east-2.amazonaws.com/gifs/mystery_0.gif" width="100%">
-  </div>
-  <div id="dropdown"></div>
-  <div id='inputSelector'>
-    <button id="inputButton" onclick="get_guess()">Guess</button>
-    <!-- disabled="true" -->
-  </div>
-  <div id="answer" style="font-weight: bold; padding-top: 1vh;"></div>
-  <div id="bb" style="font-weight: bold;"></div>
-  <div id='progress'>
-    <p>⬛️⬛️⬛️⬛️</p>
-  </div>
-  <div id='sharebtn'></div>
-  <div style="padding-top: 1vh;">
-    <ul id="prevGuesses"></ul>
-  </div>
-  <div id="drfronk" style="padding-top: 2rem; margin: auto;"></div>
-  <script src="control_bagelio.js"></script>
-
+  <main>
+    <div>
+      <h1 class="title" id="title">Who's that tennis player?</h1>
+    </div>
+    <div id="gameNum" style="text-align: left; padding-top: 0.5rem; padding-bottom: 0.5rem;"></div>
+    <div id="bagelhint">
+      <img src="https://bagelio-files.s3.us-east-2.amazonaws.com/gifs/mystery_0.gif" width="100%">
+    </div>
+    <div id="dropdown"></div>
+    <div id='inputSelector'>
+      <button id="inputButton" onclick="get_guess()">Guess</button>
+      <!-- disabled="true" -->
+    </div>
+    <div id="answer" style="font-weight: bold; padding-top: 1vh;"></div>
+    <div id="bb" style="font-weight: bold;"></div>
+    <div id='progress'>
+      <p>⬛️⬛️⬛️⬛️</p>
+    </div>
+    <div id='sharebtn'></div>
+    <div style="padding-top: 1vh;">
+      <ul id="prevGuesses"></ul>
+    </div>
+    <div id="drfronk" style="padding-top: 2rem; margin: auto;"></div>
+    <script src="control_bagelio.js"></script>
+  </main>
 </body>
 
 </html>

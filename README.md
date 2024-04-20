@@ -5,10 +5,8 @@ Guessing game of athletes
 * Save game number in backend
 * Save plaintext answer in backend
 * Style updates
-  * Previous guesses
-  * Center everything
+  * Overall styling
   * Dropdown
-  * Buttons are raised
 * Link back to other games
 
 **Backend To Do**:
