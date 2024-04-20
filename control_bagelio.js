@@ -7,7 +7,7 @@ let experimentMessage = '<p>Thanks for playing! bageld is currently in beta, so 
 let prevGuesses = []
 
 var dropdown = ""
-let jsondata = "";
+let gameParams = "";
 let apiUrl = "https://ci39xriub5.execute-api.us-east-2.amazonaws.com/bagelio_check"
 
 async function getJson(url) {
@@ -173,18 +173,20 @@ function get_tour_list(atp_wta) {
 
 async function main() {
 
-  jsondata = await getJson(apiUrl)
-  console.log(jsondata);
-  console.log('API call successful')
+  gameParams = await getJson(apiUrl)
+  console.log(gameParams);
+  showGameNum()
+  // console.log('API call successful')
+
 
   getparams = false
 
-  let listElems = get_tour_list(jsondata['tour'])
+  let listElems = get_tour_list(gameParams['tour'])
 
-  console.log(listElems)
+  // console.log(listElems)
   dropdown = jSuites.dropdown(document.getElementById('dropdown'), {
     data: listElems,
-    width: '280px',
+    width: '70%',
     autocomplete: true,
   });
 
@@ -208,7 +210,7 @@ function get_guess() {
   else {
     num_guesses += 1;
 
-    if (hashAnswer(selectedPlayer.toUpperCase()) != jsondata['answerHash']) {
+    if (hashAnswer(selectedPlayer.toUpperCase()) != gameParams['answerHash']) {
       prevGuesses.push(selectedPlayer)
       populatePrevGuesses()
       if (num_guesses == max_guesses) {
@@ -269,8 +271,11 @@ function renderEnd() {
       num_guesses - 1,
     )}${success_emoji}${"🟩".repeat(max_guesses - (num_guesses - 1) - 1)}</p>`;
 
-  createShareButton();
   progressContainer.setAttribute("style", "background-color: #333333;")
+  showAnswer()
+  createShareButton();
+  showTimeToNext();
+
 
   inputSelector.remove();
   dropdowndiv.remove();
@@ -295,6 +300,10 @@ function clipboardShare(button) {
     button.textContent = "Share";
   }, 700);
 }
+function showGameNum() {
+  const titleDiv = document.querySelector('#gameNum')
+  // titleDiv.textContent = `Bageld #${gameParams['puzzleNum']}` // TO-DO: update backend
+}
 
 function createShareButton() {
   const sharebtn = document.querySelector("#sharebtn");
@@ -308,6 +317,16 @@ function createShareButton() {
   });
 
   sharebtn.appendChild(button);
+
+
+  const drfronk = document.querySelector('#drfronk')
+  const navbutton = document.createElement('a')
+  navbutton.style.margin = "auto";
+  navbutton.appendChild(document.createTextNode('Other games'))
+  navbutton.setAttribute('href', 'https://drfronk.com');
+
+  drfronk.appendChild(navbutton)
+
 }
 
 function populatePrevGuesses() {
@@ -334,8 +353,10 @@ function highlightPrevGuess(guess) {
 
 function showAnswer() {
   const answerDiv = document.querySelector('#answer')
-  answerDiv.appendChild(document.createTextNode(`It's ${answer['artist']}!`)) // TO-DO: Update
+  // answerDiv.appendChild(document.createTextNode(`It's ${answer['artist']}!`)) // TO-DO: Update
+}
 
+function showTimeToNext() {
   var div = document.getElementById("bb");
 
   setInterval(function() {

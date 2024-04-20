@@ -2,11 +2,11 @@
 Guessing game of athletes
 
 **To Do**
+* Add nav between images
 * Save game number in backend
 * Save plaintext answer in backend
 * Style updates
   * Dropdown
-* Link back to other games
 
 **Backend To Do**:
 * Streamline creation of original file
