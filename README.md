@@ -1,6 +1,16 @@
 # bageld
 Guessing game of athletes
 
+**To Do**
+* Save game number in backend
+* Save plaintext answer in backend
+* Style updates
+  * Previous guesses
+  * Center everything
+  * Dropdown
+  * Buttons are raised
+* Link back to other games
+
 **Backend To Do**:
 * Streamline creation of original file
  * staged_videos/ now contains videos with dates assigned
