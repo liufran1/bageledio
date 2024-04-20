@@ -4,6 +4,7 @@ let max_guesses = 4;
 let success_emoji = "🎾";
 let getparams = true
 let experimentMessage = '<p>Thanks for playing! bageld is currently in beta, so there are still kinks to work out and there won\'t be daily updates just yet. Check back soon for improvements </p>'
+let prevGuesses = []
 
 var dropdown = ""
 let jsondata = "";
@@ -201,10 +202,15 @@ function get_guess() {
   if (selectedPlayer.length == 0) {
     console.log(selectedPlayer);
   }
+  else if (prevGuesses.includes(selectedPlayer)) {
+    highlightPrevGuess(selectedPlayer)
+  }
   else {
     num_guesses += 1;
 
     if (hashAnswer(selectedPlayer.toUpperCase()) != jsondata['answerHash']) {
+      prevGuesses.push(selectedPlayer)
+      populatePrevGuesses()
       if (num_guesses == max_guesses) {
         renderFailure()
       }
@@ -301,4 +307,53 @@ function createShareButton() {
   });
 
   sharebtn.appendChild(button);
+}
+
+function populatePrevGuesses() {
+  const prevGuessDiv = document.getElementById('prevGuesses')
+  prevGuessDiv.innerHTML = 'Your previous guesses:'
+  prevGuesses.forEach((song) => {
+    songItem = document.createElement('li')
+    songItem.setAttribute("name", song)
+    songItem.textContent = "❌ " + song
+    prevGuessDiv.appendChild(songItem)
+  })
+
+
+}
+
+function highlightPrevGuess(guess) {
+  const guessItem = document.getElementsByName(guess)[0]
+  guessItem.style.color = "#fa5246"
+
+  setTimeout(() => {
+    guessItem.style.color = "black"
+  }, 400);
+}
+
+function showAnswer() {
+  const answerDiv = document.querySelector('#answer')
+  answerDiv.appendChild(document.createTextNode(`It's ${answer['artist']}!`)) // TO-DO: Update
+
+  var div = document.getElementById("bb");
+
+  setInterval(function() {
+    var toDate = new Date();
+    var tomorrow = new Date();
+    tomorrow.setUTCHours(5, 0, 0, 0);
+
+    var diffMS = tomorrow.getTime() / 1000 - toDate.getTime() / 1000;
+    var diffHr = Math.floor(diffMS / 3600);
+
+    diffMS = diffMS - diffHr * 3600;
+    var diffMi = Math.floor(diffMS / 60);
+    diffMS = diffMS - diffMi * 60;
+    var diffS = Math.floor(diffMS);
+    diffHr = ((diffHr < 0) ? 24 + diffHr : diffHr)
+    var result = ((diffHr < 10) ? "0" + diffHr : diffHr);
+    result += ":" + ((diffMi < 10) ? "0" + diffMi : diffMi);
+    result += ":" + ((diffS < 10) ? "0" + diffS : diffS);
+    div.innerHTML = "Next Bageld in " + result;
+
+  }, 1000);
 }
