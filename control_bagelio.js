@@ -231,6 +231,14 @@ function get_guess() {
 function populateHint(numGuesses) {
   var hintContainer = document.getElementById("bagelhint");
   hintContainer.innerHTML = `<img src="https://bagelio-files.s3.us-east-2.amazonaws.com/gifs/mystery_${numGuesses}.gif" width="100%">`
+
+  // let slideshowhint = document.getElementById("slideshowhint")
+  // let newHint = document.createElement('img')
+  // newHint.setAttribute("class", "slide")
+  // newHint.setAttribute("src", `https://bagelio-files.s3.us-east-2.amazonaws.com/gifs/mystery_${numGuesses}.gif`)
+  // slideshowhint.appendChild(newHint)
+  // slideIndex = numGuesses + 1
+  // showSlides(slideIndex)
 }
 
 function renderNext() {
@@ -242,11 +250,7 @@ function renderNext() {
 }
 
 function renderFailure() {
-  var inputSelector = document.getElementById("inputSelector");
-  var dropdowndiv = document.getElementById("dropdown");
   var progressContainer = document.getElementById("progress");
-
-
   num_guesses += 1
 
   progressContainer.innerHTML =
@@ -254,15 +258,12 @@ function renderFailure() {
       num_guesses,
     )}</p>`;
 
-  createShareButton();
-  inputSelector.remove();
-  dropdowndiv.remove();
+  renderEndLinks()
 }
 
 function renderEnd() {
   populateHint(3)
-  var inputSelector = document.getElementById("inputSelector");
-  var dropdowndiv = document.getElementById("dropdown");
+
   var progressContainer = document.getElementById("progress");
 
   progressContainer.innerHTML =
@@ -271,6 +272,13 @@ function renderEnd() {
       num_guesses - 1,
     )}${success_emoji}${"🟩".repeat(max_guesses - (num_guesses - 1) - 1)}</p>`;
 
+  renderEndLinks()
+}
+
+function renderEndLinks() {
+  var inputSelector = document.getElementById("inputSelector");
+  var dropdowndiv = document.getElementById("dropdown");
+  var progressContainer = document.getElementById("progress");
   progressContainer.setAttribute("style", "background-color: #333333;")
   showAnswer()
   createShareButton();
@@ -279,6 +287,7 @@ function renderEnd() {
 
   inputSelector.remove();
   dropdowndiv.remove();
+
 }
 
 function clipboardShare(button) {
@@ -379,3 +388,30 @@ function showTimeToNext() {
 
   }, 1000);
 }
+
+// // slideshow experiment
+// let slideIndex = 1;
+// showSlides(slideIndex);
+
+// function plusSlides(n) {
+//   showSlides(slideIndex += n);
+// }
+
+// function currentSlide(n) {
+//   showSlides(slideIndex = n);
+// }
+
+// function showSlides(n) {
+//   let i;
+//   const slides = document.getElementsByClassName("slide");
+//   if (n > slides.length) {
+//     slideIndex = 1;
+//   }
+//   if (n < 1) {
+//     slideIndex = slides.length;
+//   }
+//   for (i = 0; i < slides.length; i++) {
+//     slides[i].style.display = "none";
+//   }
+//   slides[slideIndex - 1].style.display = "block";
+// }
