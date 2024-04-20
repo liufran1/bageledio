@@ -270,6 +270,7 @@ function renderEnd() {
     )}${success_emoji}${"🟩".repeat(max_guesses - (num_guesses - 1) - 1)}</p>`;
 
   createShareButton();
+  progressContainer.setAttribute("style", "background-color: #333333;")
 
   inputSelector.remove();
   dropdowndiv.remove();
@@ -324,10 +325,10 @@ function populatePrevGuesses() {
 
 function highlightPrevGuess(guess) {
   const guessItem = document.getElementsByName(guess)[0]
-  guessItem.style.color = "#fa5246"
+  guessItem.style.color = "#FF4500"
 
   setTimeout(() => {
-    guessItem.style.color = "black"
+    guessItem.style.color = "#00BFFF"
   }, 400);
 }
 
