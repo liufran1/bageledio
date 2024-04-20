@@ -2,7 +2,7 @@
 Guessing game of athletes
 
 **To Do**
-* Add nav between images
+* Hook up to google analytics
 * Save game number in backend
 * Save plaintext answer in backend
 * Style updates
